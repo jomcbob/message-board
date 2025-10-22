@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message</title>
+  <link rel="stylesheet" href="/styles/index.css">
+</head>
+
+<body>
+  <div class="message">
+    <h1>
+      <%= msg.user %>
+    </h1>
+    <p>
+      <%= msg.text %>
+    </p>
+    <p>
+      <%= msg.added.toLocaleString() %>
+    </p>
+  </div>
+
+  <button tabindex="-1" class="link"><a href="/">Go Back Home</a></button>
+</body>
+
+</html>

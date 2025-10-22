@@ -1,0 +1,38 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/styles/index.css">
+</head>
+
+<body>
+  <button tabindex="-1" class="link"><a href="/new">New post</a></button>
+  <div class="content">
+    <h1>
+      <%= title %>
+    </h1>
+
+    <ul>
+      <% messages.forEach(msg=> { %>
+        <a href="/message/<%= msg.id %>">
+          <li>
+            <strong>User:</strong>
+            <%= msg.user %><br>
+              <strong>Message:</strong>
+              <%= msg.text %><br>
+                <strong>Date:</strong>
+                <%= msg.added.toLocaleString() %>
+          </li>
+        </a>
+
+        <% }) %>
+    </ul>
+  </div>
+</body>
+
+</html>
