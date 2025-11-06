@@ -19,20 +19,60 @@
 
     <ul>
       <% messages.forEach(msg=> { %>
-        <a href="/message/<%= msg.id %>">
-          <li>
-            <strong>User:</strong>
-            <%= msg.username %><br>
-              <strong>Message:</strong>
-              <%= msg.message %><br>
-                <strong>Date:</strong>
-                <%= msg.created_at.toLocaleString() %>
-          </li>
-        </a>
+        <li class="userStats">
+          <a href="/message/<%= msg.id %>">
+            <div class="statBody">
+              <div class="flexRow spaceBetween">
+                <div>
+                  <strong>
+                    <%= msg.username %>
+                  </strong>
+                </div>
+                <div class="date">
+                  <%= timeAgo(msg.created_at.toISOString()) %>
+                </div>
+              </div>
+              <hr>
+              <!-- Message row -->
+              <div class="flexRow">
+                <strong>Message:</strong>
+                <span class="statMessage">
+                  <%= msg.message %>
+                </span>
+              </div>
+            </div>
+
+          </a>
+        </li>
+
 
         <% }) %>
     </ul>
   </div>
+
+  <script>
+    // this cuts off messages after a certain length, but includes the next word if it's short enough
+    // so it doesn't cut off in the middle of a word
+    document.querySelectorAll('.statMessage').forEach(el => {
+      const full = el.textContent.trim()
+      const limit = 20  // minimum characters to show
+      const maxExtra = 8 // max extra characters to include for next word
+
+      if (full.length > limit) {
+        let truncated = full.slice(0, limit)
+
+        const restOfWord = full.slice(limit)
+
+        const match = restOfWord.match(/^(\S+)/); // Match the next word \S+ → one or more non-space characters
+        if (match && match[0].length <= maxExtra) {
+          truncated += match[0]
+        }
+
+        el.textContent = truncated.trim() + '...'
+      }
+    })
+  </script>
+
 </body>
 
 </html>

@@ -21,7 +21,6 @@ async function dbGetMessageById(id) {
   }
 }
 
-
 async function addMessage(username, message) {
   try {
     const created_at = new Date();
@@ -31,7 +30,7 @@ async function addMessage(username, message) {
        RETURNING *;`,
       [username, message, created_at]
     );
-    console.log("New message added:", res.rows[0]);
+    
     return res.rows[0];
   } catch (err) {
     console.error("Error adding message to database:", err);

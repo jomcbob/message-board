@@ -9,16 +9,21 @@
 </head>
 
 <body>
-  <div class="message">
-    <h1>
-      <%= msg.username %>
-    </h1>
-    <p>
-      <%= msg.message %>
-    </p>
-    <p>
-      <%= msg.created_at.toLocaleString() %>
-    </p>
+  <div class="content messagesContent">
+    <div class="message">
+      <div class="flexRow widthMax">
+        <strong>
+          <%= msg.username %>
+        </strong>
+        <div class="date dateTopRight">
+          <%= timeAgo(msg.created_at.toISOString()) %>
+        </div>
+      </div>
+      <hr>
+      <div class="flexRow widthMax">
+        －<%= msg.message %>
+      </div>
+    </div>
   </div>
 
   <a href="/" class="link"><button tabindex="-1">Go Back Home</button></a>
