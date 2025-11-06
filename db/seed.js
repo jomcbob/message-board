@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Client } = require("pg");
-let dbQueries =  require('../db/queries');
+let dbQueries =  require('./queries');
 
 const messages = [
   { id: 1, message: "Hi there!", username: "Amando", created_at: new Date() },
@@ -19,8 +19,10 @@ CREATE TABLE IF NOT EXISTS messages (
 async function main() {
   console.log("seeding messages...");
   const client = new Client({
-    connectionString: process.env.connectionString,
-  });
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } // required for Railway
+});
+
 
   try {
     await client.connect();

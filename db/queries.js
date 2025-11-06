@@ -1,31 +1,26 @@
 const pool = require("./pool");
 
 async function dbGetAllMessages() {
-
   try {
-      const { rows } = await pool.query("SELECT * FROM messages");
-
+    const { rows } = await pool.query("SELECT * FROM messages");
     return rows;
   } catch (err) {
-    return new Error("Error fetching messages from database");
+    console.error(err)
+    return []
   }
 }
+
 
 async function dbGetMessageById(id) {
-
   try {
-    const result = await pool.query('SELECT * FROM messages WHERE id = $1', [id]);
-    const msg = result.rows[0]; // msg is either the row or undefined
-
-    if (!msg) {
-      return new Error(`Message with ID ${id} not found`);
-    }
-
-    return msg;
+    const result = await pool.query("SELECT * FROM messages WHERE id = $1", [id]);
+    return result.rows[0] || null; // return null if not found
   } catch (err) {
-      return new Error(`Message with ID ${id} not found`);
+    console.error(err);
+    return null;
   }
 }
+
 
 async function addMessage(username, message) {
   try {
@@ -37,8 +32,10 @@ async function addMessage(username, message) {
       [username, message, created_at]
     );
     console.log("New message added:", res.rows[0]);
+    return res.rows[0];
   } catch (err) {
-    return new Error("Error adding message to database");
+    console.error("Error adding message to database:", err);
+    throw err;
   }
 }
 

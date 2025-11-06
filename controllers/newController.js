@@ -5,16 +5,21 @@ async function showNewMessageFormGet(req, res) {
 }
 
 async function handleNewMessagePost(req, res, next) {
-  const { username, message } = req.body
+  const { username, message } = req.body;
   if (!username || !message) {
     const err = new Error("Username and message are required");
     err.statusCode = 400;
     return next(err);
   }
-    await dbQueries.addMessage(username, message);
 
-    res.redirect("/")
+  try {
+    await dbQueries.addMessage(username, message);
+    res.redirect("/");
+  } catch (err) {
+    next(err);
+  }
 }
+
 
 module.exports = {
   showNewMessageFormGet,

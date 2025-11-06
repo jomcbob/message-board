@@ -1,8 +1,8 @@
 const { Pool } = require("pg");
 
-module.exports = new Pool({
-  host: process.env.host,
-  user: process.env.user,
-  database: process.env.database,
-  port: process.env.DATABASEPORT
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }, // required for Railway
 });
+
+module.exports = pool;
