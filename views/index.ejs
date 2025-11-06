@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <button tabindex="-1" class="link"><a href="/new">New post</a></button>
+  <a href="/new" class="link"><button tabindex="-1">New Post</button></a>
   <div class="content">
     <h1>
       <%= title %>
@@ -22,11 +22,11 @@
         <a href="/message/<%= msg.id %>">
           <li>
             <strong>User:</strong>
-            <%= msg.user %><br>
+            <%= msg.username %><br>
               <strong>Message:</strong>
-              <%= msg.text %><br>
+              <%= msg.message %><br>
                 <strong>Date:</strong>
-                <%= msg.added.toLocaleString() %>
+                <%= msg.created_at.toLocaleString() %>
           </li>
         </a>
 

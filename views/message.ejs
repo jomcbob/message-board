@@ -11,17 +11,17 @@
 <body>
   <div class="message">
     <h1>
-      <%= msg.user %>
+      <%= msg.username %>
     </h1>
     <p>
-      <%= msg.text %>
+      <%= msg.message %>
     </p>
     <p>
-      <%= msg.added.toLocaleString() %>
+      <%= msg.created_at.toLocaleString() %>
     </p>
   </div>
 
-  <button tabindex="-1" class="link"><a href="/">Go Back Home</a></button>
+  <a href="/" class="link"><button tabindex="-1">Go Back Home</button></a>
 </body>
 
 </html>
